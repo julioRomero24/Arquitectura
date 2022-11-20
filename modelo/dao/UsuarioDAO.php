@@ -1,7 +1,9 @@
 <?php
-//en este archivo estan todas las funciones que acceden a la base de datos
+
 require_once ("DataSource.php");  //La clase que permite conectarse a la Base de Datos
 require_once (__DIR__."/../entidad/Usuario.php");
+require_once ("MonitorDAO.php");
+require_once ("EstudianteDAO.php");
 
 class UsuarioDAO {
      
@@ -32,10 +34,9 @@ class UsuarioDAO {
         return $user;
     }    
 
-
     public function registrarUsuario(Usuario $user){
         $data_source = new DataSource();
-        
+        $resultAux=0;
         $stmt1 = "INSERT INTO Usuario VALUES (:codigo,:nombre,:apellido,:fechanacimiento,:correo,:contrasena,:rol)";
 
         $resultado = $data_source->ejecutarActualizacion($stmt1, array(
@@ -49,8 +50,35 @@ class UsuarioDAO {
             )
         ); 
 
-      return $resultado;
+        if ($user->getRol()=='Monitor'){
+            $monitor=new monitorDAO();
+            $resultAux=$monitor->registrarMonitor($user->getCodigo());
+
+            /*$stmt1 = "INSERT INTO Monitor VALUES (:codigoMonitor)";
+            $resultAux = $data_source->ejecutarActualizacion($stmt1, array(
+                ':codigoMonitor' => $user->getCodigo()
+                )
+            );*/ 
+        }
+        else{            
+            $estudiante=new estudianteDAO();
+            $resultAux=$estudiante->registrarEstudiante($user->getCodigo());
+            /*$stmt1 = "INSERT INTO Estudiante VALUES (:codigoEstudiante)";
+            $resulAux = $data_source->ejecutarActualizacion($stmt1, array(
+                ':codigoEstudiante' => $user->getCodigo()
+                )
+            );*/ 
+        }
+        if($resultAux>0){
+            return $resultado;
+        }
+        else{
+            return "Error al momento de insertar en la tabla estudiante o monitor";
+        }
+        
     }
+
+    
 
     public function verUsuarios(){
         $data_source = new DataSource();
@@ -73,7 +101,7 @@ class UsuarioDAO {
             array_push($usuarios,$usuario);
         }
         
-    return $usuarios;
+        return $usuarios;
     }
 
     public function eliminarUsuario($codigo){
@@ -88,7 +116,32 @@ class UsuarioDAO {
 
       return $resultado;
     }
-
+    
+    public function obtenerMonitoresPorMateria($nombreMateria){
+        $data_source = new DataSource();
+        
+        $monitor=new MonitorDAO();
+        $materiaImpartidas=$monitor->monitorMateria($nombreMateria);
+        $usuario=NULL;
+        $usuarios=array();
+        foreach($materiaImpartidas as $indice => $valor){
+            $data_table =$data_source->ejecutarConsulta("SELECT * FROM Usuarios WHERE codigo="+$valor->getCodigoMonitor(), NULL);
+            //Si $data_table retornó una fila, quiere decir que se encontro el usuario en la base de datos
+            if(count($data_table)==1){
+                $usuario = new Usuario(
+                    $data_table[0]["codigo"],
+                    $data_table[0]["nombre"],
+                    $data_table[0]["apellido"],
+                    $data_table[0]["fechanacimiento"],
+                    $data_table[0]["correo"],
+                    $data_table[0]["contrasena"],
+                    $data_table[0]["rol"]
+                );
+                array_push($usuarios,$usuario);
+            }
+            return $usuarios;
+        }
+    }
     /*public function verUsuarioPorId($idUsuario){
         $data_source = new DataSource();
         

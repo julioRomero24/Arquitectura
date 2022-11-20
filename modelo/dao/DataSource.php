@@ -53,6 +53,19 @@ class DataSource {
         }
 
     }
+    public function ejecutarActualizacionAux($sql="", $values=array()){
+
+        if($sql != ""){
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute($values);
+            //$tabla_datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $this->conexion->lastInsertId();
+            $this->conexion=null;
+        }else{
+            return 0;
+        }
+
+    }
 
     //Con este metodo se puede actualizar y eliminar datos de la base de datos
     
