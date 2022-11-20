@@ -25,10 +25,10 @@
             $user = new Usuario($codigo, $nombre, $apellido, $fechanacimiento,$correo, $contrasena, $rol);
             $registro = registrarUsuario($user);
             
-            if($registro)
+            if($registro!=0)
                 header("Location: ../../../vista/loguin.html?msg=Se realizo el registro satisfactoriamente");
             else
-                header("Location: ../../../vista/loguin.html?msg=No se pudo realizar el registro");
+                header("Location: ../../../vista/loguin.html?msg="+$registro);
         //}
 
         

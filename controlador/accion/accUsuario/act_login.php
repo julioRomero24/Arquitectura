@@ -1,5 +1,4 @@
 <?php
-    //en este archivo se manda las vista despues de hacer login al usuario(index.html)
     //Con session_start() se puede iniciar una nueva sesión 
     //o reanudar la sesión existente
     session_start();
