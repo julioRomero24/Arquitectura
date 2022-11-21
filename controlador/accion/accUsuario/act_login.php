@@ -1,5 +1,4 @@
 <?php
-    //en este archivo se manda las vista despues de hacer login al usuario(index.html)
     //Con session_start() se puede iniciar una nueva sesión 
     //o reanudar la sesión existente
     session_start();
@@ -18,7 +17,7 @@
         if($user != null){
             //Si el usuario fue encontrado, se guarda su ID en una sesión con $_SESSION
             
-            $_SESSION['ID_CODIGO'] = $user->getCodigo();
+            $_SESSION['CODIGO'] = $user->getCodigo();
             $_SESSION['NOMBRE_USUARIO'] = $user->getNombre();
             //linea nueva
             
@@ -27,7 +26,7 @@
             }else{
                 header("Location: ../../../vista/index.php");
             }*/
-            header("Location: ../../../vista/index.html");
+            header("Location: ../../../vista/principalUsuario.php");
         }else{
             //Si el usuario no existe se vuelve a mostrar el login
             header("Location: ../../../vista/login.html");

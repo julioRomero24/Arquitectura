@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,12 +13,11 @@
 	<link rel="stylesheet" href="Css/principal2.css">
 	<link rel="stylesheet" href="Css/principalUsuario.css">
 	<link href="https://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="js/Librerias/jquery-3.6.1.min.js"></script>
 	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 </head>
-
 <body>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 	<div class="container bootstrap snippets bootdey">
@@ -28,14 +29,19 @@
 					</div>
 					<div class="profile-usertitle">
 						<div class="profile-usertitle-name">
-							Clark rodriguez
+							<?php  echo 
+								$_SESSION["NOMBRE_USUARIO"] .
+								'<div hidden id="codigoEstudiante">'
+									. $_SESSION["CODIGO"] .
+								'</div>'
+							?>
 						</div>
 					</div>
 					<div class="profile-userbuttons">
 						<button type="button" class="btn btn-info btn-sm">
 							<i class="fa fa-user-plus"></i>
-							<a href="../controlador/accion/accUsuario/act_logout.php">Cerrar Sesion</a>
-						</button>	
+							Follow
+						</button>
 					</div>
 					<div class="profile-usermenu">
 						<ul class="nav">
@@ -45,7 +51,7 @@
 									Principal</a>
 							</li>
 							<li>
-								<a href="buscarM.html">
+								<a href="#">
 									<i class="glyphicon glyphicon-user"></i>
 									Buscar</a>
 							</li>
@@ -73,12 +79,12 @@
 							<textarea id="textoPublicacion" class="form-control" rows="3"
 								placeholder="Write an idea..."></textarea>
 							<a class="Inputs"><button type="button" id="Bpublicar"
-									class="btn btn-outline-success">Publicar
+									class="btn btn-outline-success" onclick="publicar()">Publicar
 								</button></a>
 
-							<a class="Inputs" style="color: rgb(155, 208, 243);"><input type="text"
+							<a class="Inputs" style="color: rgb(155, 208, 243);"><input id="materia" type="text"
 									placeholder="Materia"> </a>
-							<a class="Inputs" style="color: rgb(155, 208, 243);""> <input type=" text"
+							<a class="Inputs" style="color: rgb(155, 208, 243);"><input id="tema" type=" text"
 								placeholder="Tema"></a>
 						</div>
 					</div>
@@ -110,7 +116,7 @@
 						</div>
 						<hr>
 						<!-- post 2 -->
-
+						
 						
 						<!-- post 3 -->
 

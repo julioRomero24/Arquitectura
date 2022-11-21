@@ -36,6 +36,11 @@ function eliminarUsuario($idUsuario){
     $dao->eliminarUsuario($idUsuario);
 }
 
+function obtenerMonitoresPorMateria($nombreMateria){
+    $dao=new UsuarioDAO();
+    $Monitores=$dao->obtenerMonitoresPorMateria($nombreMateria);
+    return $Monitores;
+}
 /*function verUsuarioPorId($idUsuario){
     $dao=new UsuarioDAO();
     $user = $dao->verUsuarioPorId($idUsuario);
