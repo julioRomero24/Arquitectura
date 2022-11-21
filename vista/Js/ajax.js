@@ -1,22 +1,24 @@
 $(document).ready(function(){
     mostrarPublicaciones()
 })
+
 function mostrarPublicaciones(){
     $.ajax({
         url:"../controlador/accion/ajax_mostrarPublicacion.php",
-        sucess:function(result){
-            //insertarPublicaciones(JSON.parse(result))
-            console.log(result)
+        success: function(result){
+            insertarPublicaciones(JSON.parse(result))
+            //console.log(JSON.parse(result))
         },
         error:function(xhr){
             alert("ocurrio un error: "+xhr.status+" "+xhr.statusText);
+            console.log("Error")
         }
     });
 }
 
 function insertarPublicaciones(result){
     let publicacion = ''
-
+    
     $.each(result, function(i) {
      
         publicacion +='<div class="row">'+
@@ -38,24 +40,28 @@ function insertarPublicaciones(result){
             
     })
 
-    $("#contenedorPost").innerHTML=publicacion
+    $("#contenedorPost").append(publicacion)
 
 }
-function ajax(){
-    const http=new XMLHttpRequest();
-    const url ='http://127.0.0.1:5500/vista/principalUsuario.html';
-
-    http.onreadystatechange=function(){
-        if(this.readyState==4 && this.status==200){
-            console.log(this.responsiveText);
-            $('#textoPublicacion').text('');
-            document.getElementById("response").innerHTML=this.responseText;
+function publicar(){
+    let contenido=$('#textoPublicacion').val();
+    let materia=$('#materia').val();
+    let tema=$('#tema').val();
+    let codigoUsuario=$("#codigoEstudiante").text();
+    $.ajax({
+        type: "POST",
+        data: { "contenido" : contenido,
+        "materia" : materia, 
+        "tema" : tema,
+        "idCodigo": codigoUsuario
+       },
+        url: "../controlador/accion/ajax_publicar.php",
+        success: function(respuesta){
+            console.log(respuesta);
+            if(respuesta==1)
+                alert("Publicado")
+            else
+                alert ("Error")
         }
-    }
-
-    http.open("GET",url);
-    http.send();
+    })
 }
-document.getElementById("Bpublicar").addEventListener("click",function(){
-    ajax();
-});
