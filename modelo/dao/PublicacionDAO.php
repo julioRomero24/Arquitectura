@@ -1,10 +1,8 @@
 <?php
 
-use LDAP\Result;
-
 require_once ("DataSource.php");  //La clase que permite conectarse a la Base de Datos
 require_once (__DIR__."/../entidad/Publicacion.php");
-require_once (__DIR__."/../entidad/MAteria.php");
+require_once (__DIR__."/../entidad/Materia.php");
 require_once (__DIR__."/../entidad/Tema.php");
 
 class PublicacionDAO{
@@ -13,20 +11,24 @@ class PublicacionDAO{
         
         $idMateria=registrarMateria($publicacion->getIdMateria());
         $idTema=registrarTema($publicacion->getIdTema(),$idMateria);
+        //Obtener resultado y validar que este bueno para seguir para id tema id materia
         if($idMateria!=0 and $idTema!=0){
-            $stmt1 = "INSERT INTO Publicaicon VALUES (NULL,:Contenido,:fecha,:codigoEstudiante,:idTema,:idMateria)";
+            $stmt1 = "INSERT INTO Publicacion VALUES (NULL,:Contenido,:fecha,:codigoEstudiante,:idTema,:idMateria)";
 
             $resultado = $data_source->ejecutarActualizacion($stmt1, array(
                 ':Contenido' => $publicacion->getContenido(),
                 ':fecha'=> $publicacion->getFecha(),
                 ':codigoEstudiante'=>$publicacion->getCodigoEstudiante(),
-                ':idTema' => $publicacion->$idTema,
-                ':idMateria' =>$publicacion->$idMateria
+                ':idTema' => $idTema,
+                ':idMateria'=> $idMateria
                 )
             );
             return $resultado;
         }
-        return "Error al momento de registrar la materia o tema";
+        else{
+            return "Error al momento de registrar la materia o tema";
+        }
+        
     }
 
     public function eliminarPublicacion($idPublicacion){
@@ -55,7 +57,7 @@ class PublicacionDAO{
                 $data_table[$indice]["idPublicacion"],
                 $data_table[$indice]["contenido"],
                 $data_table[$indice]["fecha"],
-                $data_table[$indice]["copdigoEstudiante"],
+                $data_table[$indice]["codigoEstudiante"],
                 $data_table[$indice]["idTema"],
                 $data_table[$indice]["idMateria"]
             );

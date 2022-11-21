@@ -1,11 +1,11 @@
 <?php
-require_once ("DataSource.php");  //La clase que permite conectarse a la Base de Datos
+//require_once ("DataSource.php");  //La clase que permite conectarse a la Base de Datos
 
 require_once(__DIR__."/../../modelo/dao/PublicacionDAO.php");
 
-function registrarPublicacion($Publicaicion){
+function registrarPublicacion($Publicacion){
     $dao=new PublicacionDAO();
-    $publi = $dao->registrarPublicacion($Publicaicion);
+    $publi = $dao->registrarPublicacion($Publicacion);
     return $publi;
 }
 function eliminarPublicacion($idPublicacion){
