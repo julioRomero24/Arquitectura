@@ -12,6 +12,7 @@ class PublicacionDAO{
         $idMateria=registrarMateria($publicacion->getIdMateria());
         $idTema=registrarTema($publicacion->getIdTema(),$idMateria);
         //Obtener resultado y validar que este bueno para seguir para id tema id materia
+        //Si el primero esta bueno el que sigue puede que este malo, pero el primero ya habra ejecutado la consulta
         if($idMateria!=0 and $idTema!=0){
             $stmt1 = "INSERT INTO Publicacion VALUES (NULL,:Contenido,:fecha,:codigoEstudiante,:idTema,:idMateria)";
 

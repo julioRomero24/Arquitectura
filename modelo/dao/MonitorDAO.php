@@ -3,7 +3,7 @@
 require_once ("DataSource.php");  //La clase que permite conectarse a la Base de Datos
 require_once (__DIR__."/../entidad/Monitor.php");
 require_once ("MateriaDAO.php");
-
+require_once (__DIR__."/../entidad/MateriaImpartida.php");
 class MonitorDAO {
     /*public function monitorTema($idTema){
         $data_source = new DataSource();
@@ -40,7 +40,7 @@ class MonitorDAO {
         $data_source = new DataSource();
         $materia=new materiaDAO();
         $idMateria=$materia->idPorNombre($nombreMateria);
-        $data_table = $data_source->ejecutarConsulta("SELECT * FROM MateriaImpartida WHERE idMateria="+$idMateria, NULL);
+        $data_table = $data_source->ejecutarConsulta("SELECT * FROM materiaImpartida WHERE idMateria=:idMateria", array(':idMateria'=>$idMateria));
 
         $materiaImpartida=null;
         $materiaImpartidas=array();

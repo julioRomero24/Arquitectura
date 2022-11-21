@@ -51,7 +51,7 @@ session_start();
 									Principal</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="buscarM.php">
 									<i class="glyphicon glyphicon-user"></i>
 									Buscar</a>
 							</li>

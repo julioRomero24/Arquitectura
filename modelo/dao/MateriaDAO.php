@@ -7,7 +7,7 @@ class MateriaDAO {
     public function idPorNombre($nombreMateria){
         $data_source = new DataSource();
 
-        $data_table= $data_source->ejecutarConsulta("SELECT nombre FROM Materia WHERE nombre =:nombreMateria", array(':nombreMateria'=>$nombreMateria));
+        $data_table= $data_source->ejecutarConsulta("SELECT * FROM Materia WHERE nombre =:nombreMateria", array(':nombreMateria'=>$nombreMateria));
 
         $materia=null;
         if(count($data_table)==1){ 
@@ -15,7 +15,7 @@ class MateriaDAO {
                 $data_table[0]["idMateria"],
                 $data_table[0]["nombre"]
             );
-            return $materia->getnombre();
+            return $materia->getIdMateria();
         }
         return "Error al momento de obtener el nombre por materia";
     }

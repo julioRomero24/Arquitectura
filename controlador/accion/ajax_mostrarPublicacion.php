@@ -3,7 +3,7 @@
    
    require_once (__DIR__.'/../mdb/mdbPublicacion.php');
     
-   $pensiones = verPublicaciones();
+   $publicaciones = verPublicaciones();
    
-   echo json_encode($pensiones);  
+   echo json_encode($publicaciones);  
    //echo 1;

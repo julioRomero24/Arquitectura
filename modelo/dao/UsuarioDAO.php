@@ -125,7 +125,7 @@ class UsuarioDAO {
         $usuario=NULL;
         $usuarios=array();
         foreach($materiaImpartidas as $indice => $valor){
-            $data_table =$data_source->ejecutarConsulta("SELECT * FROM Usuarios WHERE codigo="+$valor->getCodigoMonitor(), NULL);
+            $data_table =$data_source->ejecutarConsulta("SELECT * FROM Usuario WHERE codigo=:codigoMonitor", array(':codigoMonitor'=>$valor->getCodigoMonitor()));
             //Si $data_table retornó una fila, quiere decir que se encontro el usuario en la base de datos
             if(count($data_table)==1){
                 $usuario = new Usuario(
@@ -139,8 +139,8 @@ class UsuarioDAO {
                 );
                 array_push($usuarios,$usuario);
             }
-            return $usuarios;
         }
+        return $usuarios;
     }
     /*public function verUsuarioPorId($idUsuario){
         $data_source = new DataSource();
@@ -148,8 +148,8 @@ class UsuarioDAO {
         $data_table = $data_source->ejecutarConsulta("SELECT * FROM Usuario WHERE idusuario = :idUsuario", array(':idUsuario'=>$idUsuario));
 
         $usuario=null;
-        //Si $data_table retornó una fila, quiere decir que se encontro el usuario en la base de datos
-        if(count($data_table)==1){
+        //Si $data_table retornó una fila, quiere decir que se encontro el usula base de datos
+        if(count($data_table)==1){ario en 
             $usuario = new Usuario(
                 $data_table[0]["idusuario"],
                 $data_table[0]["foto"],

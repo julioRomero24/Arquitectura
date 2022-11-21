@@ -4,11 +4,10 @@ $(document).ready(function(){
 
 function mostrarPublicaciones(){
     $.ajax({
-        url:"../../controlador/accion/ajax_mostrarPublicacion.php",
-        succcess: function(result){
+        url:"../controlador/accion/ajax_mostrarPublicacion.php",
+        success: function(result){
             insertarPublicaciones(JSON.parse(result))
             //console.log(JSON.parse(result))
-            
         },
         error:function(xhr){
             alert("ocurrio un error: "+xhr.status+" "+xhr.statusText);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2022 a las 23:30:05
+-- Tiempo de generación: 21-11-2022 a las 10:22:53
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -114,7 +114,10 @@ CREATE TABLE `materia` (
 --
 
 INSERT INTO `materia` (`idMateria`, `nombre`) VALUES
-(1, 'Matematicas');
+(1, 'Matematicas'),
+(8, 'Programing'),
+(9, 'Calculo'),
+(10, 'Economia');
 
 -- --------------------------------------------------------
 
@@ -126,6 +129,17 @@ CREATE TABLE `materiaimpartida` (
   `codigoMonitor` int(10) NOT NULL,
   `idMateria` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `materiaimpartida`
+--
+
+INSERT INTO `materiaimpartida` (`codigoMonitor`, `idMateria`) VALUES
+(777, 1),
+(777, 8),
+(777, 10),
+(456456, 9),
+(456456, 10);
 
 -- --------------------------------------------------------
 
@@ -174,6 +188,17 @@ CREATE TABLE `publicacion` (
   `idMateria` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `publicacion`
+--
+
+INSERT INTO `publicacion` (`idPublicacion`, `contenido`, `fecha`, `codigoEstudiante`, `idTema`, `idMateria`) VALUES
+(1, 'hola, esto es una prueba', '2022-02-12 00:00:00', 888, 1, 1),
+(2, 'hola, esto es la segunda prueba', '2022-04-12 00:00:00', 888, 1, 1),
+(6, 'idea', '0000-00-00 00:00:00', 888, 8, 8),
+(7, 'Publicacion online', '0000-00-00 00:00:00', 888, 9, 9),
+(8, 'Nesecito ayuda', '0000-00-00 00:00:00', 888, 10, 10);
+
 -- --------------------------------------------------------
 
 --
@@ -191,7 +216,10 @@ CREATE TABLE `tema` (
 --
 
 INSERT INTO `tema` (`idTema`, `nombre`, `idMateria`) VALUES
-(1, 'Derivadas', 1);
+(1, 'Derivadas', 1),
+(8, 'Variables', 8),
+(9, 'Integrales', 9),
+(10, 'Sumas', 10);
 
 -- --------------------------------------------------------
 
@@ -218,6 +246,7 @@ INSERT INTO `usuario` (`codigo`, `nombre`, `apellido`, `fechaNacimiento`, `corre
 (777, 'pedro', 'perz', '2022-12-31', 'pedro@mail.com', '123', 'Monitor'),
 (888, 'Sergio', 'solo', '1900-01-01', 'sergi@mail.com', '123', 'Estudiante'),
 (999, 'Augusto', 'Ospino', '1500-12-01', 'augusto@ospino.com', '123', 'Estudiante'),
+(5620, 'Julio', 'Perez', '0000-00-00', 'jul@mail.com', '13', 'Monitor'),
 (12345, 'Juan', 'Perez', '2022-12-01', 'juan@mail.com', '123', 'Estudiante'),
 (101010, 'Leonel', 'Messi', '2004-07-31', 'leo@messi.com', '10', 'Estudiante'),
 (456456, 'sergi', 'Roberto', '2000-07-31', 'rober@lewandowski.com', '123', 'Monitor');
@@ -342,19 +371,19 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `idMateria` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idMateria` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `idPublicacion` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPublicacion` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `tema`
 --
 ALTER TABLE `tema`
-  MODIFY `idTema` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idTema` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
