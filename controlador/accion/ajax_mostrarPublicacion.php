@@ -1,8 +1,9 @@
 <?php
-   // session_start();
+   session_start();
    
-    require_once ('D:\xamp\htdocs\Monitores\controlador\mdb\mdbPublicacion.php');
+   require_once (__DIR__.'/../mdb/mdbPublicacion.php');
     
-    $pensiones = verPensiones();
-   echo 1;
-   // echo json_encode($pensiones);  
+   $pensiones = verPublicaciones();
+   
+   echo json_encode($pensiones);  
+   //echo 1;
